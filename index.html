@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Index</title>
+
+<script>
+function func()
+{
+var x = document.index.name;
+var y = document.index.age;
+if(x.value == null || x.value == "")
+{
+alert("Please enter your name..");
+x.focus();
+return false;
+}
+if(y.value == null || y.value == "")
+{
+alert("Please enter your age..");
+y.focus();
+return false;
+}
+}
+</script>
+</head><body>
+<form onsubmit="return func()" method="get" action="https://google.com" name="index">NAME<span style="color: red;">*</span> : &nbsp; &nbsp; <input name="name"><br>
+<br>
+AGE<span style="color: red;">*</span>
+&nbsp;&nbsp;&nbsp; : &nbsp; &nbsp; <input name="age"><br>
+<br>
+<input name="sb" value="SUBMIT" type="submit">&nbsp;&nbsp;&nbsp;
+<input name="rb" value="RESET" type="reset"></form>
+</body></html>

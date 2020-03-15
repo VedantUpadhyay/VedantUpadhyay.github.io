@@ -1,1 +1,1 @@
-hi ajax
+<h2 align="center">Ajax Says hi</h2>

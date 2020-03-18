@@ -61,93 +61,109 @@ function check_game() {
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[4] == "X" && table[5] == "X" && table[6] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[7] == "X" && table[8] == "X" && table[9] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[1] == "X" && table[4] == "X" && table[7] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[2] == "X" && table[5] == "X" && table[8] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[3] == "X" && table[6] == "X" && table[9] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[1] == "X" && table[5] == "X" && table[9] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[3] == "X" && table[5] == "X" && table[7] == "X") {
         alert("X Won!!");
         score_X++;
         setScores("X");
         gameStatus = "finished";
+        new_game();
     }
     if(table[1] == "O" && table[2] == "O" && table[3] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[4] == "O" && table[5] == "O" && table[6] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");
         gameStatus = "finished";
+        new_game();
     }
     else if(table[7] == "O" && table[8] == "O"  && table[9] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");gameStatus = "finished";
+        new_game();
     }
     else if(table[1] == "O" && table[4] =="O" && table[7] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");gameStatus = "finished";
+        new_game();
     }
     else if(table[2] == "O" && table[5] == "O" && table[8] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");gameStatus = "finished";
+        new_game();
     }
     else if(table[3] == "O" && table[6] == "O" && table[9] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");gameStatus = "finished";
+        new_game();
     }
     else if(table[1] == "O" && table[5] == "O" && table[9] == "O") {
         alert("O Won!!");
         score_O++;
-        setScores("O");gameStatus = "finished";
+        setScores("O");gameStatus = "finished";new_game();
+
     }
     else if(table[3] == "O" && table[5] == "O" && table[7] == "O") {
         alert("O Won!!");
         score_O++;
         setScores("O");gameStatus = "finished";
+        new_game();
     }
     else if(currentSteps == 9) {
-       alert("Game is Draw.");gameStatus = "finished";
+       alert("Game is Draw.");gameStatus = "finished";new_game();
     }
 }
 

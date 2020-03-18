@@ -1,0 +1,117 @@
+* {
+    font-family: segoe ui;
+    padding: 0;
+    margin: 0;
+}
+body {
+    height: 100vh;
+    background-color: lightgrey;
+}
+
+.visib {
+    opacity: 1;
+}
+
+.opac {
+    opacity: 0;
+}
+
+.playerOption {
+    width: 100vw;
+    text-align: center;
+    margin: 0 auto;
+}
+.playerOption h1 {
+    font-size: 7vh;
+}
+
+.playerOption button {
+   /* font-weight: bold;*/
+   padding: 1.8vh;
+    border: none;
+    width: max-content;
+    height: max-content;
+    font-size: 3.5vh;
+    margin:1vh;
+    background-color: rgb(3, 24, 59);
+    color: white;
+}
+
+.board {
+    margin-top: 0vh;
+    width: 100vw;
+    font-size: 90px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    height: 35vh;
+}
+
+#newGame {
+    margin-top: 5vh;
+    text-align: center;
+}
+
+#newBtn {
+    font-size: large;
+    border: none;
+    color: white;
+    background-color: rgb(3, 24, 59);
+    padding: 1vh;
+}
+
+#turn {
+    text-align: left;
+    width: max-content;
+    padding: 0.7vh;
+    border: 2px solid rgb(19, 11, 49);
+    color: rgb(19, 11, 49);
+    font-size: 26px;
+    margin-bottom: 0vh;
+    /* text-align: center; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scoreCard {
+    text-align: center;
+}
+
+.scoreCard table,tr,td {
+    font-size: 3vh;
+    border-collapse:collapse;
+    border: 2px solid black;
+   /* font-weight: 900;*/
+    /*text-decoration: underline;*/
+    width:50%;
+    height: 1vh;
+    margin-bottom:1vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cell:nth-child(1),.cell:nth-child(4),.cell:nth-child(7) {
+    border-right: 2px solid black;
+}
+
+.cell:nth-child(1),.cell:nth-child(2),.cell:nth-child(3) {
+    border-bottom: 2px solid black;
+}
+
+.cell:nth-child(4),.cell:nth-child(5),.cell:nth-child(6) {
+    border-bottom: 2px solid black;
+}
+
+.cell:nth-child(2),.cell:nth-child(5),.cell:nth-child(8) {
+    border-right: 2px solid black;
+}
+
+.cell {
+   /* padding: 1vw;*/
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

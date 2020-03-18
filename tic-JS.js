@@ -163,7 +163,8 @@ function check_game() {
         new_game();
     }
     else if(currentSteps == 9) {
-       alert("Game is Draw.");gameStatus = "finished";new_game();
+       alert("Game is Draw.");gameStatus = "finished";
+       new_game();
     }
 }
 

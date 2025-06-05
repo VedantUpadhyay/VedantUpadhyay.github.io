@@ -1,1 +1,1099 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Machine Learning Final Exam Study Guide & Cheatsheet</title>
+  <!-- Include MathJax for rendering LaTeX equations -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      margin: 20px;
+      max-width: 800px;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    h2 {
+      margin-top: 1.5em;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3em;
+    }
+    h3 {
+      margin-top: 1.2em;
+      color: #555;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    pre {
+      background: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 0.4em 0.6em;
+      text-align: left;
+    }
+    .cheatsheet {
+      page-break-before: always;
+    }
+    .formula {
+      font-family: "Times New Roman", serif;
+      font-size: 1.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Machine Learning Final Exam Study Guide &amp; Cheatsheet</h1>
+
+  <!-- ======================= STUDY GUIDE ======================= -->
+  <h2>Study Guide</h2>
+
+  <h3>1. High-Yield Topics Overview</h3>
+  <ul>
+    <li><strong>Fundamental Concepts &amp; Evaluation</strong>
+      <ul>
+        <li>i.i.d. assumption</li>
+        <li>Supervised vs. Unsupervised learning</li>
+        <li>Overfitting vs. Underfitting</li>
+        <li>Bias-Variance trade-off</li>
+        <li>Curse of Dimensionality</li>
+        <li>Proper model evaluation (train/test split)</li>
+      </ul>
+    </li>
+    <li><strong>Linear Models &amp; Regularization</strong>
+      <ul>
+        <li>Ordinary Least Squares (OLS) Regression, Normal Equation</li>
+        <li>Loss functions (MSE)</li>
+        <li>Lasso (L1) vs. Ridge (L2) regularization</li>
+        <li>Bias-variance effect of regularization</li>
+      </ul>
+    </li>
+    <li><strong>Probability &amp; Statistics in ML</strong>
+      <ul>
+        <li>Bayes’ Theorem and interpretation (frequentist vs. Bayesian)</li>
+        <li>Maximum Likelihood Estimation (MLE) &amp; Maximum A Posteriori (MAP)</li>
+        <li>Entropy and Information Gain</li>
+        <li>Naive Bayes classifier and “naive” (independence) assumption</li>
+      </ul>
+    </li>
+    <li><strong>Core Classification Algorithms</strong>
+      <ul>
+        <li>Support Vector Machines (SVM): margin, support vectors, primal &amp; dual forms</li>
+        <li>Perceptron: update rule, convergence conditions</li>
+        <li>Logistic Regression: sigmoid function, logistic loss</li>
+        <li>Decision Trees: entropy, information gain, Gini if applicable</li>
+        <li>k-Nearest Neighbors (KNN): choice of k, distance metrics, curse of dimensionality</li>
+      </ul>
+    </li>
+    <li><strong>Neural Networks</strong>
+      <ul>
+        <li>One-hidden-layer architecture, activation functions (sigmoid, ReLU)</li>
+        <li>Forward propagation computations</li>
+        <li>Loss functions (squared loss, cross-entropy)</li>
+        <li>Backpropagation (chain rule, gradient expressions)</li>
+        <li>Universal Approximation Theorem</li>
+      </ul>
+    </li>
+    <li><strong>Unsupervised Learning</strong>
+      <ul>
+        <li>k-Means Clustering: assignment &amp; update steps, objective</li>
+        <li>Expectation-Maximization (EM) for Gaussian Mixtures: E-step &amp; M-step equations</li>
+      </ul>
+    </li>
+    <li><strong>Reinforcement Learning Basics</strong>
+      <ul>
+        <li>Markov Decision Process (MDP) terminology: state, action, reward</li>
+        <li>Value function <span class="formula">\(V(s)\)</span> vs. Q-function <span class="formula">\(Q(s,a)\)</span></li>
+        <li>Policy <span class="formula">\(\pi\)</span>, discount factor <span class="formula">\(\gamma\)</span></li>
+        <li>Bellman equation for \(V(s)\) and Bellman optimality equation</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2. Fundamental Concepts &amp; Definitions</h3>
+
+  <h4>2.1 i.i.d. Assumption</h4>
+  <p>
+    The <strong>i.i.d. assumption</strong> means each training example
+    is drawn <em>independently</em> from the same unknown probability
+    distribution. This ensures that:
+  </p>
+  <ul>
+    <li>There is no dependency between samples (no time-series or group structure unless modeled separately).</li>
+    <li>All samples share one underlying distribution, making statistical analyses and generalization valid.</li>
+  </ul>
+  <p><em>Sample question:</em> “What is the i.i.d. assumption in machine learning?” (Expect a 1–2 sentence answer describing independent draws from the same distribution.)</p>
+
+  <h4>2.2 Supervised vs. Unsupervised Learning</h4>
+  <p>
+    <strong>Supervised learning</strong> uses labeled data (inputs \(x\) with known outputs \(y\)) to learn a function \(f: x \mapsto y\),
+    e.g., classification or regression.  
+    <strong>Unsupervised learning</strong> finds patterns in unlabeled data (no target \(y\)), e.g., clustering or dimensionality reduction.
+  </p>
+  <p><em>Sample question:</em> “What is the difference between supervised and unsupervised algorithms?” – A 2–4 sentence explanation.</p>
+
+  <h4>2.3 Overfitting vs. Underfitting</h4>
+  <p>
+    <strong>Overfitting</strong> occurs when a model learns not only the underlying pattern but also the noise in training data.  
+    It results in low training error but high test error (poor generalization).  
+    <strong>Underfitting</strong> happens when a model is too simple to capture the true trend in data, yielding high error on both training and test sets.
+  </p>
+  <p><em>Sample question:</em> “Define overfitting and underfitting.”  Also: “Why is it misleading to evaluate on training data?” – Because the model may have memorized noise, leading to an overly optimistic assessment of performance.</p>
+
+  <h4>2.4 Bias-Variance Trade-off</h4>
+  <p>
+    <strong>Bias</strong> is the error due to erroneous or overly simplistic assumptions in the learning algorithm (underfitting).  
+    <strong>Variance</strong> is the error due to sensitivity to small fluctuations in the training set (overfitting).  
+    Total expected error (for regression) decomposes as:
+    <br>
+    <span class="formula">\[
+      \text{Error}(x) \;=\; \underbrace{\bigl(\mathrm{Bias}[\,\hat{f}(x)\,]\bigr)^2}_{\text{Squared Bias}}
+      \;+\;
+      \underbrace{\mathrm{Var}\bigl[\hat{f}(x)\bigr]}_{\text{Variance}}
+      \;+\;
+      \underbrace{\sigma^2_{\varepsilon}}_{\text{Irreducible Noise}}.
+    \]</span>
+  </p>
+  <p>
+    As model complexity increases:  
+    – Bias ↓ (models fit data better)  
+    – Variance ↑ (models sensitive to noise)  
+    A “sweet spot” exists where bias and variance are balanced to minimize total error.
+  </p>
+
+  <h4>2.5 Curse of Dimensionality</h4>
+  <p>
+    As the number of features (dimensions) grows, the volume of the space grows exponentially, making data sparse.  
+    Distances become less discriminative (all points appear similarly far apart), and the sample size needed for reliable density estimates grows exponentially.  
+    This can degrade algorithms that rely on distance metrics or density estimates.
+  </p>
+  <p><em>Sample question:</em> “Provide a brief explanation of the curse of dimensionality.”</p>
+
+  <h4>2.6 Proper Model Evaluation</h4>
+  <p>
+    Evaluating a model’s performance on the <strong>training set</strong> is misleading because the model has already seen that data; it may have “memorized” noise.  
+    Instead, use a separate <strong>validation</strong> or <strong>test set</strong> (or perform cross-validation) to estimate how the model will generalize to unseen data.  
+    This prevents selection bias and gives a reliable performance estimate.
+  </p>
+
+  <h3>3. Linear Regression &amp; Regularization</h3>
+
+  <h4>3.1 Ordinary Least Squares (OLS) Regression</h4>
+  <p>
+    Model:  
+    <span class="formula">\(\hat{y} = w^T x + b\)</span>, where \(w \in \mathbb{R}^d\) and \(b \in \mathbb{R}\).  
+    Given training data \(\{(x_i, y_i)\}_{i=1}^N\), OLS minimizes:
+    <br>
+    <span class="formula">\[
+      L_{\text{OLS}}(w,b) \;=\; \frac{1}{2N}\sum_{i=1}^N \bigl(y_i - (w^T x_i + b)\bigr)^2.
+    \]</span>
+    Taking derivatives and setting \(\nabla_{w,b} L = 0\) yields the <strong>normal equation</strong> (including bias by augmenting \(x\) with a constant 1 if desired):
+    <br>
+    <span class="formula">\[
+      w^* = (X^T X)^{-1} X^T y.
+    \]</span>
+    (Here \(X\in\mathbb{R}^{N\times d}\) is the design matrix, and \(y\in\mathbb{R}^N\).)
+  </p>
+
+  <h4>3.2 Ridge Regression (L2 Regularization)</h4>
+  <p>
+    Adds an \(\ell_2\) penalty to discourage large weights:
+    <br>
+    <span class="formula">\[
+      \min_{w,b} \;\; \frac{1}{2N}\sum_{i=1}^N \bigl(y_i - (w^T x_i + b)\bigr)^2 
+      \;+\; \frac{\lambda}{2}\,\|w\|_2^2,
+    \]</span>
+    where \(\lambda > 0\).  
+    The closed-form solution (assuming augmented feature vector to absorb \(b\)) is:
+    <br>
+    <span class="formula">\[
+      w^* \;=\; (X^T X + \lambda I)^{-1} X^T y.
+    \]</span>
+    Ridge shrinks all coefficients but typically does not set any exactly to zero.  
+    It trades off bias vs. variance, often reducing variance at the cost of slightly increased bias.
+  </p>
+
+  <h4>3.3 Lasso Regression (L1 Regularization)</h4>
+  <p>
+    Adds an \(\ell_1\) penalty:
+    <br>
+    <span class="formula">\[
+      \min_{w,b} \;\; \frac{1}{2N}\sum_{i=1}^N \bigl(y_i - (w^T x_i + b)\bigr)^2 
+      \;+\; \lambda \,\|w\|_1,
+    \]</span>
+    where \(\|w\|_1 = \sum_{j=1}^d |w_j|\).  
+    No closed-form solution; typically solved via coordinate descent or proximal methods.  
+    Lasso can drive some coefficients exactly to zero (feature selection effect).  
+    Geometric intuition (compare constraint sets):  
+    <ul>
+      <li>L1 constraint “diamond” shape → sparsity</li>
+      <li>L2 constraint “circle” shape → small but nonzero weights</li>
+    </ul>
+    <em>Sample conceptual question:</em> Given a cost contour plot and L1 vs L2 constraints, identify which is Lasso and which is Ridge.
+  </p>
+
+  <h4>3.4 When &amp; Why to Use Regularization</h4>
+  <ul>
+    <li>Use regularization when you suspect overfitting (e.g., high-dimensional data, many features).  
+      Ridge helps when most features are relevant but potentially noisy; Lasso helps if many features are irrelevant (enforces sparsity).</li>
+    <li>Regularization adds bias but reduces variance, often improving <em>test</em> error.</li>
+    <li>Choose \(\lambda\) by cross-validation or a validation set to balance bias and variance.</li>
+  </ul>
+
+  <h3>4. Probability &amp; Bayes’ Theorem in ML</h3>
+
+  <h4>4.1 Bayes’ Theorem</h4>
+  <p>
+    <span class="formula">\[
+      P(Y \mid X) \;=\; \frac{P(X \mid Y)\,P(Y)}{P(X)}.
+    \]</span>
+    Here:
+    <ul>
+      <li>\(P(Y)\) = prior probability of \(Y\).</li>
+      <li>\(P(X \mid Y)\) = likelihood of observing \(X\) given \(Y\).</li>
+      <li>\(P(X)\) = evidence (marginal probability of \(X\)).</li>
+      <li>\(P(Y \mid X)\) = posterior probability of \(Y\) after observing \(X\).</li>
+    </ul>
+    A <strong>Frequentist</strong> treats \(P(\theta)\) as fixed but unknown and interprets probability as long-run frequency.  
+    A <strong>Bayesian</strong> treats parameters (like \(Y\) or model parameters \(\theta\)) as random variables with prior distributions and updates beliefs with evidence to get a posterior.
+  </p>
+  <p><em>Sample question:</em> “Write down Bayes’ theorem, explain each term, and contrast frequentist vs Bayesian interpretations.”</p>
+
+  <h4>4.2 Maximum Likelihood Estimation (MLE)</h4>
+  <p>
+    Given data \(\{x_i\}_{i=1}^N\) assumed i.i.d. according to some parametric distribution \(p(x \mid \theta)\), 
+    the likelihood is <span class="formula">\(\displaystyle L(\theta) = \prod_{i=1}^N p(x_i \mid \theta)\)</span>.  
+    The MLE is found by maximizing the log-likelihood:
+    <br>
+    <span class="formula">\(\ell(\theta) = \sum_{i=1}^N \ln p(x_i \mid \theta)\),  \quad  \(\hat{\theta}_{\mathrm{MLE}} = \arg\max_{\theta} \ell(\theta).\)</span>
+  </p>
+  <p><em>Example:</em> Biased coin: 8 flips, 5 heads, 3 tails. Let \(h = P(\text{head})\).  
+    Likelihood: \(L(h) = h^5 (1-h)^3\). Log-likelihood: \(\ell(h) = 5\ln h + 3\ln(1-h)\).  
+    Differentiating \(\mathrm{d}\ell/\mathrm{d}h = \frac{5}{h} - \frac{3}{1-h} = 0 \implies \hat{h} = 5/8.\)  
+  </p>
+  <p>
+    <strong>MAP Estimate:</strong> Incorporates a prior \(p(\theta)\).  
+    Posterior \(p(\theta \mid \text{data}) \propto p(\text{data} \mid \theta)\,p(\theta)\).  
+    Maximizing this gives \(\hat{\theta}_{\mathrm{MAP}} = \arg\max_{\theta} \bigl[\ell(\theta) + \ln p(\theta)\bigr].\)
+  </p>
+
+  <h4>4.3 Bayes Example: Spam Filter</h4>
+  <p>
+    Suppose:
+    <ul>
+      <li>25% of emails are spam: <span class="formula">\(P(\text{Spam})=0.25\).</span></li>
+      <li>Spam filter accuracy:  
+        <span class="formula">
+          \(P(\text{Tag=Spam} \mid \text{Spam}) = 0.95,\)  
+          \(P(\text{Tag=Spam} \mid \text{NotSpam}) = 0.10.\)
+        </span>
+      </li>
+    </ul>
+    <strong>Question:</strong> “If an email is tagged as spam, what is the probability it is actually NOT spam?”  
+    Use Bayes:
+    <br>
+    <span class="formula">
+      \(P(\text{NotSpam} \mid \text{Tag=Spam}) 
+      = \frac{P(\text{Tag=Spam} \mid \text{NotSpam}) \,P(\text{NotSpam})}{P(\text{Tag=Spam})}.\)
+    </span>
+    Where:
+    <br>
+    <span class="formula">
+      \(P(\text{NotSpam}) = 0.75,\)  
+      \(P(\text{Tag=Spam}) = 0.95\times0.25 \;+\; 0.10\times0.75.\)
+    </span>
+    Compute numerator, denominator, and get the numeric answer.
+  </p>
+  <p><em>Sample question:</em> “Given the filter’s performance, compute \(P(\text{NotSpam} \mid \text{Tag=Spam})\).”</p>
+
+  <h3>5. Naive Bayes Classifier</h3>
+
+  <h4>5.1 “Naive” Independence Assumption</h4>
+  <p>
+    The Naive Bayes classifier assumes that features \(\{X_1, X_2, \dots, X_d\}\) are <strong>conditionally independent given the class label</strong> \(Y\).  
+    In other words:
+    <br>
+    <span class="formula">\[
+      P(X_1, X_2, \dots, X_d \mid Y) 
+      = \prod_{j=1}^d P(X_j \mid Y).
+    \]</span>
+    This “naive” assumption simplifies computation of joint likelihoods.  
+  </p>
+  <p><em>Sample question:</em> “State the naive assumption made by Naive Bayes.”</p>
+
+  <h4>5.2 Model Formulation &amp; Prediction</h4>
+  <p>
+    Estimate:
+    \[ 
+      P(Y=c) = \frac{\text{count}(Y=c)}{N}, 
+      \quad
+      P(X_j = x_j \mid Y=c) = \frac{\text{count}(X_j = x_j,\,Y=c)}{\text{count}(Y=c)}.
+    \]
+    For a new instance \((x_1,\dots,x_d)\), compute the unnormalized posterior for each class \(c\):
+    <br>
+    <span class="formula">\[
+      \tilde{P}(Y=c \mid x) 
+      = \;P(Y=c)\;\prod_{j=1}^d P(x_j \mid Y=c).
+    \]</span>
+    Normalize if you need actual probabilities:
+    <br>
+    <span class="formula">\[
+      P(Y=c \mid x) 
+      = \frac{\tilde{P}(Y=c \mid x)}{\sum_{c'} \tilde{P}(Y=c' \mid x)}.
+    \]</span>
+    Predict:
+    <br>
+    <span class="formula">\(\hat{y} = \arg\max_{c}\; P(Y=c)\prod_{j=1}^d P(x_j \mid Y=c).\)</span>
+  </p>
+
+  <h4>5.3 Example Calculation</h4>
+  <p>
+    Suppose binary features \(X_1, X_2 \in \{0,1\}\) and binary class \(Y\in\{+,-\}\).  
+    Training set:
+
+    <table>
+      <thead>
+        <tr><th>\(x_1\)</th><th>\(x_2\)</th><th>\(y\)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>1</td><td>+</td></tr>
+        <tr><td>1</td><td>0</td><td>+</td></tr>
+        <tr><td>0</td><td>1</td><td>+</td></tr>
+        <tr><td>0</td><td>0</td><td>−</td></tr>
+        <tr><td>0</td><td>0</td><td>−</td></tr>
+        <tr><td>1</td><td>1</td><td>−</td></tr>
+        <tr><td>1</td><td>1</td><td>−</td></tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>\(P(y=+)\) = (# of “+”)/7 = 3/7.</li>
+      <li>\(P(y=−)\) = 4/7.</li>
+      <li>\(P(x_1=1 \mid y=+)\) = 2/3, since among the 3 positives, 2 have \(x_1=1\).</li>
+      <li>\(P(x_1=1 \mid y=−)\) = 3/4, since among the 4 negatives, 3 have \(x_1=1\).</li>
+      <li>\(P(x_2=0 \mid y=+)\) = 1/3 (only one of the three “+” examples has \(x_2=0\)).</li>
+      <li>\(P(x_2=0 \mid y=−)\) = 2/4 = 1/2.</li>
+    </ul>
+
+    To classify \(x=(x_1=1,\,x_2=0)\):
+    <br>
+    <span class="formula">\[
+      \tilde{P}(+\mid x) 
+      = \frac{3}{7}\times \frac{2}{3}\times \frac{1}{3} 
+      = \frac{2}{21}, 
+    \]
+    \[
+      \tilde{P}(-\mid x) 
+      = \frac{4}{7}\times \frac{3}{4}\times \frac{1}{2} 
+      = \frac{3}{14}.
+    \]</span>
+    Compare \(\frac{2}{21} \approx 0.095\) vs \(\frac{3}{14}\approx0.214\).  
+    So predict \(y = -\).
+  </p>
+  <p><em>Sample question:</em> “Fill in the blanks as calculated by Naive Bayes for \(x_1=1, x_2=0\). Which label is predicted?”</p>
+
+  <h3>6. Support Vector Machines (SVM)</h3>
+
+  <h4>6.1 Hard-Margin SVM (Linearly Separable)</h4>
+  <p>
+    Primal optimization:
+    <br>
+    <span class="formula">\[
+      \min_{w,b}\; \frac{1}{2}\,\|w\|^2 
+      \quad \text{s.t.} \quad 
+      y_i\,(w\cdot x_i + b) \;\ge\; 1,\; \forall i.
+    \]</span>
+    The margin (distance between two parallel hyperplanes \(w \cdot x + b = \pm 1\)) is  
+    <span class="formula">\(\frac{2}{\|w\|}.\)</span>  
+    Maximizing margin ⇔ minimizing \(\tfrac12\|w\|^2\).  
+    Support vectors are points with \(y_i(w\cdot x_i + b) = 1\) (on the margin).
+  </p>
+
+  <h4>6.2 Soft-Margin SVM</h4>
+  <p>
+    If not perfectly separable, introduce slack \(\xi_i \ge 0\):
+    <br>
+    <span class="formula">\[
+      \min_{w,b,\xi}\; \frac{1}{2}\,\|w\|^2 \;+\; C\sum_{i=1}^N \xi_i 
+      \quad 
+      \text{s.t.} \; y_i(w\cdot x_i + b) \ge 1 - \xi_i,\; \xi_i \ge 0.
+    \]</span>
+    \(C > 0\) trades off margin size vs. slack penalty (misclassification).  
+    Large \(C\) → narrow margin, fewer violations;  
+    Small \(C\) → wider margin, more tolerance for violations.
+  </p>
+
+  <h4>6.3 Dual Formulation</h4>
+  <p>
+    Introduce Lagrange multipliers \(\alpha_i \ge 0\). The dual problem is:
+    <br>
+    <span class="formula">\[
+      \max_{\alpha}\; 
+      \sum_{i=1}^N \alpha_i \;-\; \frac{1}{2}\sum_{i=1}^N \sum_{j=1}^N 
+      \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) 
+      \quad
+      \text{s.t.} \; \sum_{i=1}^N \alpha_i y_i = 0,\; 0 \le \alpha_i \le C.
+    \]\</span>
+    Once \(\alpha^*\) found:
+    <br>
+    <span class="formula">\[
+      w^* = \sum_{i=1}^N \alpha_i^*\,y_i\,x_i, 
+      \quad 
+      b^* = y_k - w^* \cdot x_k \quad (\text{for any support vector } k).
+    \]</span>
+    Only support vectors have \(\alpha_i^* > 0\). The decision function:
+    <br>
+    <span class="formula">\[
+      f(x) = \sum_{i \in SV} \alpha_i^*\,y_i\,(x_i \cdot x) + b^*.
+    \]</span>
+  </p>
+
+  <h4>6.4 Kernel Trick</h4>
+  <p>
+    To handle non-linear separation, replace dot product \((x_i \cdot x_j)\) with kernel  
+    <span class="formula">\(K(x_i, x_j) = \phi(x_i) \cdot \phi(x_j)\)</span>, where \(\phi\) maps inputs to a high-dimensional space.  
+    The dual becomes:
+    <br>
+    <span class="formula">\[
+      \max_{\alpha}\; 
+      \sum_{i} \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i \alpha_j y_i y_j \,K(x_i, x_j)
+      \quad
+      \text{s.t. } \sum_i \alpha_i y_i = 0,\; 0 \le \alpha_i \le C.
+    \]\</span>
+    Decision:  
+    <br>
+    <span class="formula">\[
+      f(x) = \sum_{i \in SV} \alpha_i^*\,y_i\,K(x_i, x) + b^*.
+    \]</span>
+    Common kernels:  
+    <ul>
+      <li>Polynomial: \(K(x,z) = (\,x\cdot z + c\,)^d\).</li>
+      <li>Gaussian (RBF): \(K(x,z) = \exp\bigl(-\tfrac{\|x-z\|^2}{2\sigma^2}\bigr).\)</li>
+    </ul>
+  </p>
+
+  <h4>6.5 Properties &amp; Sample Questions</h4>
+  <ul>
+    <li><strong>Support Vectors:</strong> Data points with \(\alpha_i^*>0\) (on or inside the margin). Removing non-SVs does not change solution.</li>
+    <li><strong>Margin:</strong> \(\text{margin} = 1/\|w\|\). Larger margin → better generalization (in theory).</li>
+    <li><strong>Hyperplane Selection:</strong> Among many linear separators, SVM picks the one with maximum margin.  
+      <em>Sample question:</em> “Given three candidate hyperplanes A, B, C, which would SVM choose?” → the one with the widest gap between +/− classes.</li>
+    <li><strong>Dual Variables (\(\alpha_i\)):</strong> Only support vectors have \(\alpha_i>0\). \(\alpha_i\) can be interpreted as weight for each support vector in the decision function.</li>
+  </ul>
+
+  <h3>7. Perceptron &amp; Logistic Regression</h3>
+
+  <h4>7.1 Perceptron Algorithm</h4>
+  <p>
+    Iterative linear classifier. For each example \((x_i, y_i)\) with \(y_i\in\{+1,-1\}\):
+    <ol>
+      <li>Predict \(\hat{y} = \text{sign}(w \cdot x_i)\). If \(w\cdot x_i = 0\), assume misclassification.</li>
+      <li>If \(\hat{y} \neq y_i\), update  
+        <span class="formula">\[
+          w := w + \eta \, y_i \, x_i,
+        \]</span>  
+        typically \(\eta = 1\).</li>
+    </ol>
+    Repeat cycling through data until no errors or maximum iterations.  
+    Convergence:  
+    <ul>
+      <li>Converges to a solution if data is linearly separable (Perceptron Convergence Theorem).</li>
+      <li>Does not converge (keeps oscillating) if data is not linearly separable.</li>
+    </ul>
+    <em>Sample question:</em> “On what data does perceptron converge? When does it not converge?”  
+  </p>
+
+  <h4>7.2 Perceptron Example</h4>
+  <p>
+    Given initial \(w = (-1,\,1,\,1)\) and four examples (with bias implicitly included or \(x_0=1\) if needed), simulate one pass:  
+    <table>
+      <thead>
+        <tr><th>\(x\)</th><th>\(y\)</th><th>\(w \cdot x\)</th><th>Update?</th><th>New \(w\)</th></tr>
+      </thead>
+      <tbody>
+        <!-- Example table; fill with actual numbers if provided in an exam -->
+        <tr>
+          <td>(-1, 2, 1)</td><td>-1</td><td>compute</td><td>yes/no</td><td>compute \(w + y\,x\)</td>
+        </tr>
+        <tr>
+          <td>(1, 1, 1)</td><td>+1</td><td>compute</td><td>yes/no</td><td>compute</td>
+        </tr>
+        <tr>
+          <td>(-2, 3, 2)</td><td>-1</td><td>compute</td><td>yes/no</td><td>compute</td>
+        </tr>
+        <tr>
+          <td>(2, -1, -1)</td><td>+1</td><td>compute</td><td>yes/no</td><td>compute</td>
+        </tr>
+      </tbody>
+    </table>
+  </p>
+  <p><em>Sample question:</em> “Simulate one pass through the data with perceptron, showing \(w\) after each example.”</p>
+
+  <h4>7.3 Logistic Regression</h4>
+  <p>
+    Model:  
+    <span class="formula">\(\displaystyle P(Y=+1 \mid x) = \sigma(w \cdot x) \quad\text{where}\; \sigma(t) = \frac{1}{1 + e^{-t}}.\)</span>  
+    Loss (for one example \((x,y)\) with \(y\in\{+1,-1\}\)):
+    <br>
+    <span class="formula">\(\ell(w; x,y) = \ln\bigl(1 + e^{-y\, (w\cdot x)}\bigr).\)</span>
+    Equivalent to maximizing log-likelihood under Bernoulli model.  
+    Differences vs SVM:
+    <ul>
+      <li><strong>Logistic loss</strong> is smooth and differentiable everywhere; yields probability estimates.</li>
+      <li><strong>Hinge loss</strong> (SVM) is \(\max(0,\,1 - y\,w\cdot x)\), not differentiable at 1, focuses on margin.</li>
+    </ul>
+    <em>Sample question:</em> “True/False: Logistic loss is better than L2 loss in classification tasks. Justify.”  
+  </p>
+
+  <h3>8. Decision Trees</h3>
+
+  <h4>8.1 Entropy &amp; Information Gain</h4>
+  <p>
+    For a random variable \(Y\) over \(\{1,\dots,C\}\), entropy:
+    <br>
+    <span class="formula">\(\displaystyle H(Y) = -\sum_{c=1}^C p_c \,\log_2(p_c),\) where \(p_c = P(Y=c).\)</span>  
+    If splitting on feature \(X\) with possible values \(\{x_1,\dots,x_k\}\), the expected conditional entropy:
+    <br>
+    <span class="formula">\(\displaystyle H(Y \mid X) 
+      = \sum_{j=1}^k P(X=x_j)\;H\bigl(Y \mid X=x_j\bigr).
+    \]</span>
+    Information Gain:
+    <br>
+    <span class="formula">\(\displaystyle \mathrm{Gain}(Y,\,X) 
+      = H(Y) - H(Y\mid X).\)</span>
+    The feature with the largest Gain is chosen to split at each node.
+  </p>
+
+  <h4>8.2 Example Calculation (Winter 2024 Q3)</h4>
+  <p>
+    Dataset:  
+    <br>
+    <table>
+      <thead>
+        <tr><th>Entry</th><th>GPA</th><th>Study</th><th>Pass?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Low</td><td>No</td><td>−</td></tr>
+        <tr><td>2</td><td>Low</td><td>Yes</td><td>+</td></tr>
+        <tr><td>3</td><td>Med</td><td>No</td><td>+</td></tr>
+        <tr><td>4</td><td>Med</td><td>Yes</td><td>+</td></tr>
+        <tr><td>5</td><td>Med</td><td>Yes</td><td>+</td></tr>
+        <tr><td>6</td><td>High</td><td>No</td><td>−</td></tr>
+        <tr><td>7</td><td>High</td><td>Yes</td><td>+</td></tr>
+        <tr><td>8</td><td>High</td><td>Yes</td><td>+</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>Compute \(H(\text{Pass})\). There are 5 “+” and 3 “−”.  
+        <span class="formula">\[
+          H(\text{Pass}) 
+          = -\bigl(\tfrac{5}{8}\log_2\tfrac{5}{8} + \tfrac{3}{8}\log_2\tfrac{3}{8}\bigr).
+        \]</span>
+      </li>
+      <li>Compute Gain\((\text{Pass}, \text{GPA})\).  
+        For each GPA value (Low, Med, High), compute entropy of Pass within that subset, weight by \(P(\text{GPA}=\cdot)\).  
+        <br>
+        \(\mathrm{Gain} = H(\text{Pass}) \;-\; \sum_{g\in\{\text{Low,Med,High}\}} P(\text{GPA}=g)\,H(\text{Pass} \mid \text{GPA}=g).\)</li>
+      <li>Compare with Gain\((\text{Pass}, \text{Study})\). The attribute with higher Gain is used first</li>
+    </ul>
+    <p><em>Sample question:</em> “Compute \(H(\text{Pass})\), Gain for GPA, compare with Gain for Study = 0.345. Which split first?”</p>
+  </p>
+
+  <h4>8.3 Gini Impurity (Alternate Measure)</h4>
+  <p>
+    Gini impurity of a distribution \(\{p_1,\dots,p_C\}\):
+    <br>
+    <span class="formula">\(\displaystyle G(p) = 1 - \sum_{c=1}^C p_c^2.\)</span>
+    Choice of split can also be based on reduction in Gini impurity (similar to entropy).
+  </p>
+
+  <h3>9. k-Nearest Neighbors (KNN)</h3>
+  <p>
+    To classify a new point \(x\):
+    <ol>
+      <li>Compute distance (e.g., Euclidean) from \(x\) to all training points \(\{x_i\}\).</li>
+      <li>Find the \(k\) nearest neighbors (smallest distances).</li>
+      <li>Take majority vote among those \(k\) neighbors’ labels.  
+        <br>
+        For regression, average their \(y\)-values.</li>
+    </ol>
+    Key points:
+    <ul>
+      <li>Choice of \(k\):  
+        <ul>
+          <li>Small \(k\) → low bias, high variance (sensitive to noise).</li>
+          <li>Large \(k\) → high bias, low variance (over-smooths boundaries).</li>
+        </ul>
+      </li>
+      <li>Distance metrics matter (Euclidean, Manhattan, etc.).</li>
+      <li>Feature scaling is crucial (so no single feature dominates the distance).</li>
+      <li>Curse of dimensionality: In high dimensions, points become nearly equidistant; performance degrades. </li>
+    </ul>
+    <em>Sample question:</em> “What is the difference between k-means and KNN? What does ‘k’ stand for in each?”  
+    <ul>
+      <li>KNN is supervised (classification/regression). ‘k’ = number of neighbors used to vote/predict. </li>
+      <li>k-Means is unsupervised (clustering). ‘k’ = number of clusters to form.</li>
+    </ul>
+  </p>
+
+  <h3>10. k-Means Clustering</h3>
+
+  <h4>10.1 Algorithm Steps</h4>
+  <ol>
+    <li>Initialize \(k\) cluster centroids \(\{\mu_1, \dots, \mu_k\}\) (randomly select points or use k-means++).</li>
+    <li><strong>Assignment step:</strong> Assign each data point \(x_i\) to the nearest centroid:
+      <br>
+      <span class="formula">\[
+        c_i \;=\; \arg\min_{j} \|\,x_i - \mu_j\|_2.
+      \]</span>
+      This yields clusters \(\{C_1, \dots, C_k\}\).</li>
+    <li><strong>Update step:</strong> Recompute each centroid as the mean of the assigned points:
+      <br>
+      <span class="formula">\[
+        \mu_j \;=\; \frac{1}{|C_j|} \sum_{x_i \in C_j} x_i,\quad j=1,\dots,k.
+      \]</span>
+    </li>
+    <li>Repeat assignment &amp; update until assignments do not change (or centroids converge).</li>
+  </ol>
+  <p>
+    Objective minimized:  
+    <span class="formula">\(\displaystyle \sum_{j=1}^k \sum_{x_i \in C_j} \|x_i - \mu_j\|^2.\)</span>  
+    Each iteration does not increase the objective; algorithm converges to a (local) minimum.
+  </p>
+
+  <h4>10.2 Example (Winter 2024 Q5)</h4>
+  <p>
+    Suppose one-dimensional data points \(\{x_1, x_2, \dots\}\) and initial centroids \(C_1=9\), \(C_2=4\).  
+    Use L1 distance \(\lvert x_i - C_j\rvert\) to assign points:
+    <br>
+    <table>
+      <thead>
+        <tr><th>\(x_i\)</th><th>\(\lvert x_i - C_1\rvert\)</th><th>\(\lvert x_i - C_2\rvert\)</th><th>Cluster</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>\(\lvert1-9\rvert=8\)</td><td>\(\lvert1-4\rvert=3\)</td><td>2</td></tr>
+        <tr><td>7</td><td>\(\lvert7-9\rvert=2\)</td><td>\(\lvert7-4\rvert=3\)</td><td>1</td></tr>
+        <tr><td>3</td><td>\(\lvert3-9\rvert=6\)</td><td>\(\lvert3-4\rvert=1\)</td><td>2</td></tr>
+        <tr><td>4</td><td>\(\lvert4-9\rvert=5\)</td><td>\(\lvert4-4\rvert=0\)</td><td>2</td></tr>
+        <tr><td>9</td><td>\(\lvert9-9\rvert=0\)</td><td>\(\lvert9-4\rvert=5\)</td><td>1</td></tr>
+        <tr><td>6</td><td>\(\lvert6-9\rvert=3\)</td><td>\(\lvert6-4\rvert=2\)</td><td>2</td></tr>
+      </tbody>
+    </table>
+    Now recompute centroids:
+    <ul>
+      <li>\(C_1\) ← mean of points assigned to cluster 1 (i.e., those closest to 9). Suppose points assigned to cluster 1 were \(\{7,9\}\).  
+        <span class="formula">\(\mu_1 = (7 + 9)/2 = 8.\)</span></li>
+      <li>\(C_2\) ← mean of points assigned to cluster 2 (e.g., \(\{1,3,4,6\}\)).  
+        <span class="formula">\(\mu_2 = (1 + 3 + 4 + 6)/4 = 3.5.\)</span></li>
+    </ul>
+    Repeat until convergence.
+  </p>
+
+  <h3>11. Expectation-Maximization (EM) for Gaussian Mixtures</h3>
+
+  <h4>11.1 Overview</h4>
+  <p>
+    EM is used for parameter estimation with latent (hidden) variables. For a Gaussian Mixture Model (GMM) with \(K\) components:
+    <ul>
+      <li>Data: \(\{x_i\}_{i=1}^N\).</li>
+      <li>Parameters: component weights \(\{\pi_k\}_{k=1}^K\), means \(\{\mu_k\}_{k=1}^K\), and covariances \(\{\Sigma_k\}_{k=1}^K\).</li>
+      <li>Latent variable \(z_i\in\{1,\dots,K\}\) indicates which Gaussian generated \(x_i\).</li>
+    </ul>
+  </p>
+
+  <h4>11.2 E-step</h4>
+  <p>
+    Compute the “responsibilities” (soft assignments) for each data point \(x_i\) and each cluster \(k\):
+    <br>
+    <span class="formula">\[
+      \gamma_{i,k} \;=\; P(z_i = k \mid x_i,\text{current params})
+      \;=\; \frac{\pi_k \,\mathcal{N}(x_i \mid \mu_k, \Sigma_k)}
+      {\sum_{j=1}^K \pi_j\,\mathcal{N}(x_i \mid \mu_j, \Sigma_j)}.
+    \]</span>
+  </p>
+
+  <h4>11.3 M-step</h4>
+  <p>
+    Update parameters to maximize the expected complete-data log-likelihood:
+    <ul>
+      <li>Mixing weights:
+        <br>
+        <span class="formula">\(\displaystyle \pi_k 
+          = \frac{1}{N} \sum_{i=1}^N \gamma_{i,k}.\)</span>
+      </li>
+      <li>Means:
+        <br>
+        <span class="formula">\(\displaystyle \mu_k
+          = \frac{\sum_{i=1}^N \gamma_{i,k}\,x_i}{\sum_{i=1}^N \gamma_{i,k}}.\)</span>
+      </li>
+      <li>Covariances (for full covariance):
+        <br>
+        <span class="formula">\(\displaystyle \Sigma_k
+          = \frac{\sum_{i=1}^N \gamma_{i,k}\,(x_i - \mu_k)(x_i - \mu_k)^T}
+                 {\sum_{i=1}^N \gamma_{i,k}}.\)</span>
+        For 1-D data, variance becomes
+        \(\sigma_k^2 = \frac{\sum_{i=1}^N \gamma_{i,k}(x_i - \mu_k)^2}{\sum_{i=1}^N \gamma_{i,k}}.\)
+      </li>
+    </ul>
+    Repeat E-step &amp; M-step until convergence (parameters change negligibly or log-likelihood stabilizes).
+  </p>
+
+  <h4>11.4 Example (Winter 2024 Q6)</h4>
+  <p>
+    Given data points \(\{4, 7, 6, 11\}\) to be clustered into \(K=2\) Gaussians. Suppose after an E-step we have <em>unnormalized</em> responsibilities \(z_{i,1}, z_{i,2}\):
+    <table>
+      <thead>
+        <tr><th>\(x_i\)</th><th>\(z_{i,1}\)</th><th>\(z_{i,2}\)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4</td><td>0.8</td><td>0.2</td></tr>
+        <tr><td>7</td><td>0.4</td><td>0.6</td></tr>
+        <tr><td>6</td><td>0.7</td><td>0.3</td></tr>
+        <tr><td>11</td><td>0.1</td><td>0.9</td></tr>
+      </tbody>
+    </table>
+    <ol>
+      <li><strong>E-step purpose:</strong> Compute expected cluster assignments \(\gamma_{i,k}\) using current parameters.</li>
+      <li><strong>M-step purpose:</strong> Update \(\pi_k, \mu_k, \sigma_k^2\) to maximize expected complete-data log-likelihood given \(\gamma_{i,k}\).</li>
+      <li>Compute new mixing weights:
+        <br>
+        <span class="formula">\(\displaystyle \pi_1 = \frac{0.8 + 0.4 + 0.7 + 0.1}{4} = \frac{2.0}{4} = 0.5,\quad
+          \pi_2 = 1 - \pi_1 = 0.5.\)</span>
+      </li>
+      <li>Compute new means:
+        <br>
+        \(\displaystyle \mu_1 = \frac{0.8 \times 4 + 0.4 \times 7 + 0.7 \times 6 + 0.1 \times 11}{0.8+0.4+0.7+0.1} 
+          = \frac{(3.2 + 2.8 + 4.2 + 1.1)}{2.0} = \frac{11.3}{2.0} = 5.65.\)  
+        \(\displaystyle \mu_2 = \frac{0.2 \times 4 + 0.6 \times 7 + 0.3 \times 6 + 0.9 \times 11}{0.2+0.6+0.3+0.9} 
+          = \frac{(0.8 + 4.2 + 1.8 + 9.9)}{2.0} = \frac{16.7}{2.0} = 8.35.\)
+      </li>
+      <li>Compute variances (1-D):
+        <br>
+        \(\displaystyle \sigma_1^2 = \frac{0.8(4 - 5.65)^2 + 0.4(7 - 5.65)^2 + 0.7(6 - 5.65)^2 + 0.1(11 - 5.65)^2}{0.8+0.4+0.7+0.1}.\)  
+        Compute each term:  
+        \(\quad 0.8(−1.65)^2 = 0.8(2.7225)=2.178, \quad
+                 0.4(1.35)^2 = 0.4(1.8225)=0.729, \quad
+                 0.7(0.35)^2 = 0.7(0.1225)=0.0858, \quad
+                 0.1(5.35)^2 = 0.1(28.6225)=2.862. \)  
+        Sum = \(2.178 + 0.729 + 0.0858 + 2.862 = 5.8548.\) Divide by 2.0 →  
+        \(\sigma_1^2 \approx 2.9274.\)  
+        For cluster 2:
+        \(\displaystyle \sigma_2^2 = \frac{0.2(4 - 8.35)^2 + 0.6(7 - 8.35)^2 + 0.3(6 - 8.35)^2 + 0.9(11 - 8.35)^2}{2.0}.\)  
+        Compute:  
+        \(\;0.2(−4.35)^2=0.2(18.9225)=3.7845, \;
+           0.6(−1.35)^2=0.6(1.8225)=1.0935, \;
+           0.3(−2.35)^2=0.3(5.5225)=1.6568, \;
+           0.9(2.65)^2=0.9(7.0225)=6.3202.\)  
+        Sum = \(3.7845 + 1.0935 + 1.6568 + 6.3202 = 12.855.\) Divide by 2.0 →  
+        \(\sigma_2^2 \approx 6.4275.\)
+      </li>
+      <li>Plot these Gaussians on a number line, centroids at 5.65 (σ≈1.71) and 8.35 (σ≈2.54).</li>
+    </ol>
+  </p>
+
+  <h3>12. Neural Networks</h3>
+
+  <h4>12.1 Activation Functions</h4>
+  <ul>
+    <li><strong>Sigmoid:</strong> \(\sigma(x) = \frac{1}{1+e^{-x}}\). Output in (0,1). Used historically for binary classification but suffers from vanishing gradients for large \(|x|\).  
+      Derivative: \(\sigma'(x) = \sigma(x)\,\bigl(1 - \sigma(x)\bigr).\)</li>
+    <li><strong>ReLU (Rectified Linear Unit):</strong> \(r(x) = \max(0,\,x)\).  
+      Output is 0 if \(x \le 0\), else \(x\). Efficient, alleviates vanishing gradients (for positive region). Derivative:  
+      \(r'(x) = \begin{cases}0, & x \le 0 \\ 1, & x>0\end{cases}.\)</li>
+  </ul>
+  <p><em>Sample question:</em> “What are activation functions and why are they used in neural networks? Give two examples.”</p>
+
+  <h4>12.2 Forward &amp; Backprop Example (Winter 2024 Q4)</h4>
+  <p>
+    Network diagram:  
+    <br>
+    <img src="network_diagram.png" alt="Network Diagram" style="max-width:100%;"/>  
+    (Assume \(z_1\) and \(z_2\) are inputs, \(z_3, z_4\) hidden (ReLU), \(z_5\) output (ReLU or linear), weights \(w_{ij}\).)
+  </p>
+  <p><strong>Forward Pass:</strong> For each data point \((x_1, x_2)\):
+    <ol>
+      <li>\(z_1 = x_1,\; z_2 = x_2.\)</li>
+      <li>\(a_3 = w_{13}\,z_1 + w_{23}\,z_2, \quad z_3 = \max(0, a_3).\)</li>
+      <li>\(a_4 = w_{14}\,z_1 + w_{24}\,z_2, \quad z_4 = \max(0, a_4).\)</li>
+      <li>\(a_5 = w_{35}\,z_3 + w_{45}\,z_4, \quad z_5 = \max(0, a_5).\)</li>
+    </ol>
+    Compute \(z_3, z_4, z_5\) for each training sample, fill in the table.  
+    (Exam provided some values to start and you complete the rest.)
+  </p>
+
+  <h4>12.3 Loss Function</h4>
+  <p>
+    Suppose the true label is \(y\). Using squared loss:
+    <br>
+    <span class="formula">\(\displaystyle L = \tfrac12\,\bigl(z_5 - y\bigr)^2.\)</span>
+  </p>
+
+  <h4>12.4 Backpropagation (Gradient Computation)</h4>
+  <p>
+    We want gradients \(\frac{\partial L}{\partial w_{ij}}\) (and possibly \(\partial L / \partial z_1\) if optimizing input).  
+    <strong>Chain rule:</strong>
+    <ul>
+      <li>Output layer error:  
+        \(\delta_5 
+        = \frac{\partial L}{\partial a_5} 
+        = \frac{\partial L}{\partial z_5}\,\frac{\partial z_5}{\partial a_5}.\)  
+        If \(z_5 = \max(0,a_5)\) (ReLU), then \(\partial z_5 / \partial a_5 = 1\) if \(a_5>0\), else 0.  
+        With squared loss, \(\partial L / \partial z_5 = z_5 - y.\)  
+        So \(\delta_5 = (z_5 - y)\cdot \mathbf{1}(a_5>0).\)</li>
+      <li>Hidden layer node \(j\in\{3,4\}\):  
+        \(\delta_j = \frac{\partial L}{\partial a_j} 
+        = \sum_{k \in \{5\}} \frac{\partial L}{\partial a_k}\,\frac{\partial a_k}{\partial z_j}\,\frac{\partial z_j}{\partial a_j}.\)  
+        Since \(a_5 = w_{35} z_3 + w_{45} z_4\),  
+        \(\partial a_5 / \partial z_j = w_{j5}.\)  
+        If \(z_j = \max(0,a_j)\), then \(\partial z_j / \partial a_j = \mathbf{1}(a_j > 0).\)  
+        So \(\delta_j = \delta_5\,w_{j5}\,\mathbf{1}(a_j > 0).\)</li>
+      <li>Gradient for weight \(w_{ij}\):  
+        \(\displaystyle \frac{\partial L}{\partial w_{ij}} 
+          = \frac{\partial L}{\partial a_j}\,\frac{\partial a_j}{\partial w_{ij}} 
+          = \delta_j \cdot z_i.\)</li>
+      <li>If optimizing input \(z_1\) as a parameter:  
+        \(\displaystyle \frac{\partial L}{\partial z_1} 
+          = \sum_{j\in\{3,4\}} \frac{\partial L}{\partial a_j}\,\frac{\partial a_j}{\partial z_1} 
+          = \delta_3\,w_{13} + \delta_4\,w_{14}.\)  
+        Then update \(z_1 := z_1 - \eta\,\frac{\partial L}{\partial z_1}.\)</li>
+    </ul>
+    <em>Sample question:</em> “Derive symbolic expressions for forward pass and compute \(\partial L / \partial w_{34}, \partial L / \partial w_{24}, \partial a_4 / \partial z_1\).”
+  </p>
+
+  <h4>12.5 Universal Approximation Theorem</h4>
+  <p>
+    A feed-forward neural network with a single hidden layer of sufficiently many hidden units (and a suitable activation function, e.g., sigmoid or ReLU) can approximate any continuous function on a compact domain to arbitrary accuracy.  
+    In other words, one hidden layer is a “universal approximator” if the number of neurons is large enough.  
+    <em>Implication:</em> Even a shallow network can model complex decision boundaries, though it may require many neurons.
+  </p>
+
+  <h3>13. Reinforcement Learning Basics</h3>
+
+  <h4>13.1 MDP Terminology &amp; Bellman Equation</h4>
+  <p>
+    A Markov Decision Process (MDP) is defined by tuple \((\mathcal{S}, \mathcal{A}, P, R, \gamma)\), where:
+    <ul>
+      <li>\(\mathcal{S}\) = set of states.</li>
+      <li>\(\mathcal{A}\) = set of actions.</li>
+      <li>Transition kernel \(P(s' \mid s, a)\) = probability of next state \(s'\) given current state \(s\) and action \(a\).</li>
+      <li>Reward function \(R(s,a,s')\) = reward received when transitioning from \(s\) to \(s'\) by action \(a\).</li>
+      <li>Discount factor \(\gamma\in[0,1)\) = how future rewards are weighted relative to immediate rewards.</li>
+    </ul>
+    <strong>Value function</strong> \(V^{\pi}(s)\): expected discounted return when starting at state \(s\) and following policy \(\pi\):
+    <span class="formula">\[
+      V^{\pi}(s) = \mathbb{E}_{\pi}\Bigl[\sum_{t=0}^{\infty} \gamma^t\,R(s_t, a_t, s_{t+1}) \,\big\vert\, s_0 = s\Bigr].
+    \]</span>
+    <strong>Action-value function (Q-value)</strong> \(Q^{\pi}(s,a)\): expected return starting at \(s\), taking action \(a\), then following \(\pi\):
+    <span class="formula">\[
+      Q^{\pi}(s,a) 
+      = \mathbb{E}\bigl[R(s,a,s') + \gamma\,V^{\pi}(s')\bigr].
+    \]</span>
+    <strong>Bellman Expectation Equation</strong> (for policy \(\pi\)):
+    <span class="formula">\[
+      V^{\pi}(s) 
+      = \sum_{a} \pi(a \mid s)\,\sum_{s'}P(s'\mid s,a)\bigl[R(s,a,s') + \gamma\,V^{\pi}(s')\bigr].
+    \]</span>
+    <strong>Bellman Optimality Equation</strong> (for optimal \(V^*\)):
+    <span class="formula">\[
+      V^*(s) 
+      = \max_{a}\,\sum_{s'}P(s'\mid s,a)\bigl[R(s,a,s') + \gamma\,V^*(s')\bigr].
+    \]</span>
+  </p>
+  <p>
+    <strong>Policy \(\pi\):</strong> mapping from states to action probabilities.  
+    <strong>Discount factor \(\gamma\):</strong> weights future rewards; ensures the infinite sum converges and encodes how much the agent values future vs. immediate rewards.  
+    <em>Sample question:</em> “Define value, Q-value, policy, and state the Bellman equation for \(V(s)\).”
+  </p>
+
+  <h4>13.2 Example: Value Iteration</h4>
+  <p>
+    If performing value iteration with initial \(V_0(s)=0\) for all states, one update yields:
+    <br>
+    <span class="formula">\[
+      V_{1}(s) = \max_{a}\;\sum_{s'}P(s'|s,a)\bigl[R(s,a,s') + \gamma\,V_{0}(s')\bigr].
+    \]</span>
+    For example, for a small MDP, compute \(V_1(\text{WakeUp})\) and \(V_1(\text{GoodVibes})\).  
+    <em>Sample question:</em> “Compute \(V_1\) for given states, given known transitions and rewards.”  
+  </p>
+
+  <h4>13.3 Applications &amp; Pros/Cons</h4>
+  <p>
+    <strong>Applications:</strong>
+    <ul>
+      <li>Game playing (e.g., Chess, Go, Atari).  
+        <em>Advantage:</em> learns optimal strategies through self-play;  
+        <em>Disadvantage:</em> large state spaces and long horizons can make learning slow.</li>
+      <li>Robot control (e.g., walking robots).  
+        <em>Advantage:</em> can adapt to complex dynamics;  
+        <em>Disadvantage:</em> requires many trials (simulators often used).</li>
+      <li>Recommendation systems with sequential user feedback.  
+        <em>Advantage:</em> can optimize long-term engagement;  
+        <em>Disadvantage:</em> exploration may annoy users.</li>
+    </ul>
+  </p>
+
+  <hr style="margin-top: 2em;">
+
+  <!-- ======================= CHEATSHEET ======================= -->
+  <h2 class="cheatsheet">Formula Cheatsheet (Cheatsheet)</h2>
+
+  <h3>A. Probability &amp; Bayes</h3>
+  <ul>
+    <li><strong>Bayes’ Theorem:</strong>  
+      <span class="formula">\[
+        P(Y \mid X) \;=\; \frac{P(X \mid Y)\,P(Y)}{P(X)}.
+      \]</span>
+      – Prior × Likelihood / Evidence.
+    </li>
+    <li><strong>MLE:</strong>  
+      \(\displaystyle L(\theta) = \prod_{i=1}^N p(x_i \mid \theta)\), \quad  
+      \(\hat{\theta}_{\mathrm{MLE}} = \arg\max_{\theta} \sum_{i=1}^N \ln p(x_i \mid \theta).\)</li>
+    <li><strong>MAP:</strong>  
+      \(\displaystyle \hat{\theta}_{\mathrm{MAP}} 
+      = \arg\max_{\theta} \bigl[ \sum_{i=1}^N \ln p(x_i \mid \theta) + \ln p(\theta)\bigr].\)</li>
+    <li><strong>Entropy (Shannon):</strong>  
+      \(\displaystyle H(p) = -\sum_{c} p_c \,\log_2(p_c).\)</li>
+    <li><strong>Information Gain:</strong>  
+      \(\displaystyle \mathrm{Gain}(Y, X) 
+      = H(Y) \;-\; \sum_{x_j} P(X=x_j)\,H(Y \mid X=x_j).\)</li>
+  </ul>
+
+  <h3>B. Regression &amp; Regularization</h3>
+  <ul>
+    <li><strong>Linear Regression (OLS):</strong>  
+      \(\hat{y} = w^T x + b.\)  
+      MSE Loss: \(L = \tfrac{1}{2N}\sum_{i=1}^N (y_i - w^T x_i - b)^2.\)  
+      <br>
+      Normal equation (augmented):  
+      \(\displaystyle w^* = (X^T X)^{-1} X^T y.\)</li>
+    <li><strong>Ridge Regression (L2):</strong>  
+      \(\min_{w} \tfrac{1}{2N}\sum_{i}(y_i - w^T x_i)^2 + \tfrac{\lambda}{2}\|w\|_2^2.\)  
+      <br>
+      Solution: \(w^* = (X^T X + \lambda I)^{-1} X^T y.\)</li>
+    <li><strong>Lasso Regression (L1):</strong>  
+      \(\min_{w} \tfrac{1}{2N}\sum_{i}(y_i - w^T x_i)^2 + \lambda\|w\|_1.\)  
+      (No closed form; coordinate descent.)</li>
+    <li><strong>Bias-Variance Decomposition (Regression):</strong>  
+      \(\displaystyle \mathbb{E}[(y - \hat{f}(x))^2] 
+        = (\mathrm{Bias}[\hat{f}(x)])^2 + \mathrm{Var}[\hat{f}(x)] + \sigma_{\varepsilon}^2.\)</li>
+  </ul>
+
+  <h3>C. Classification Losses</h3>
+  <ul>
+    <li><strong>Logistic Sigmoid:</strong>  
+      \(\sigma(t) = \frac{1}{1 + e^{-t}}.\)  
+      \(\sigma'(t) = \sigma(t)\,(1 - \sigma(t)).\)</li>
+    <li><strong>Logistic Loss (Cross-Entropy):</strong>  
+      For \(y\in\{\pm1\}\),  
+      \(\ell(w; x,y) = \ln\bigl(1 + e^{-y(w\cdot x)}\bigr).\)</li>
+    <li><strong>Hinge Loss (SVM):</strong>  
+      \(\ell_{\text{hinge}}(w; x,y) = \max\bigl(0,\,1 - y(w\cdot x)\bigr).\)</li>
+    <li><strong>Squared Loss (for classification, not recommended):</strong>  
+      \(\ell_{\text{L2}} = \tfrac{1}{2}(y - \hat{y})^2,\) where \(\hat{y} = w\cdot x\).</li>
+    <li><strong>Perceptron Update:</strong> If \(\text{sign}(w\cdot x_i)\neq y_i,\)  
+      \(\displaystyle w := w + \eta\,y_i\,x_i.\)</li>
+  </ul>
+
+  <h3>D. Naive Bayes</h3>
+  <ul>
+    <li><strong>Independence Assumption:</strong>  
+      \(P(x_1,\dots,x_d \mid y) = \prod_{j=1}^d P(x_j \mid y).\)</li>
+    <li><strong>Posterior (unnormalized):</strong>  
+      \(\displaystyle \tilde{P}(y \mid x) = P(y)\,\prod_{j=1}^d P(x_j \mid y).\)</li>
+    <li><strong>Classification Rule:</strong>  
+      \(\displaystyle \hat{y} = \arg\max_{y} \; P(y)\,\prod_{j=1}^d P(x_j \mid y).\)</li>
+  </ul>
+
+  <h3>E. SVM</h3>
+  <ul>
+    <li><strong>Hard-Margin (Separability):</strong>  
+      \(\min_{w,b} \tfrac{1}{2}\|w\|^2\quad \text{s.t. } y_i(w\cdot x_i + b)\ge1\;\forall i.\)</li>
+    <li><strong>Soft-Margin:</strong>  
+      \(\min_{w,b,\xi} \tfrac{1}{2}\|w\|^2 + C\sum_{i}\xi_i, \quad y_i(w\cdot x_i + b)\ge1-\xi_i,\;\xi_i\ge0.\)</li>
+    <li><strong>Dual Problem:</strong>  
+      \(\displaystyle \max_{\alpha} \sum_{i}\alpha_i - \tfrac12\sum_{i,j}\alpha_i\alpha_j y_i y_j (x_i\cdot x_j)\)  
+      s.t. \(\sum_i \alpha_i y_i = 0,\; 0 \le \alpha_i \le C.\)</li>
+    <li><strong>Solution:</strong>  
+      \(w^* = \sum_{i=1}^N \alpha_i^* y_i x_i,\)  
+      decision \(f(x) = \sum_{i\in SV} \alpha_i^* y_i (x_i\cdot x) + b^*.\)</li>
+    <li><strong>Kernel Trick:</strong> Replace \((x_i\cdot x_j)\) with \(K(x_i, x_j)\).  
+      \(\displaystyle f(x) = \sum_{i\in SV} \alpha_i^* y_i K(x_i, x) + b^*.\)</li>
+  </ul>
+
+  <h3>F. k-Means Clustering</h3>
+  <ul>
+    <li><strong>Assignment:</strong>  
+      \(\displaystyle c_i = \arg\min_{j=1,\dots,k} \|x_i - \mu_j\|^2.\)</li>
+    <li><strong>Update:</strong>  
+      \(\displaystyle \mu_j = \frac{1}{|C_j|}\sum_{x_i\in C_j} x_i.\)</li>
+    <li><strong>Objective:</strong>  
+      \(\displaystyle \min_{C_1,\dots,C_k} \sum_{j=1}^k \sum_{x_i\in C_j} \|x_i - \mu_j\|^2.\)</li>
+  </ul>
+
+  <h3>G. EM for Gaussian Mixtures</h3>
+  <ul>
+    <li><strong>E-step:</strong>  
+      \(\displaystyle \gamma_{i,k} = \frac{\pi_k\,\mathcal{N}(x_i \mid \mu_k,\Sigma_k)}{\sum_{j=1}^K \pi_j\,\mathcal{N}(x_i \mid \mu_j,\Sigma_j)}.\)</li>
+    <li><strong>M-step:</strong>  
+      \(\displaystyle \pi_k = \frac{1}{N} \sum_{i=1}^N \gamma_{i,k},\)  
+      \(\displaystyle \mu_k = \frac{\sum_{i=1}^N \gamma_{i,k} x_i}{\sum_{i=1}^N \gamma_{i,k}},\)  
+      \(\displaystyle \Sigma_k = \frac{\sum_{i=1}^N \gamma_{i,k} (x_i - \mu_k)(x_i - \mu_k)^T}{\sum_{i=1}^N \gamma_{i,k}}.\)</li>
+  </ul>
+
+  <h3>H. Neural Networks</h3>
+  <ul>
+    <li><strong>Neuron Activation:</strong>  
+      \(a_j = \sum_{i} w_{ij} z_i + b_j,\quad z_j = f(a_j).\)  
+      For ReLU: \(f(a) = \max(0, a)\). For sigmoid: \(f(a) = 1/(1+e^{-a}).\)</li>
+    <li><strong>Loss (Squared):</strong>  
+      \(\displaystyle L = \tfrac{1}{2}\sum_{n}(z_{5}^{(n)} - y^{(n)})^2.\)</li>
+    <li><strong>Backprop:  
+      \(\delta_j = \frac{\partial L}{\partial a_j}.\)</strong>
+      <ul>
+        <li>Output layer: \(\displaystyle \delta_5 = (z_5 - y)\cdot f'(a_5).\)</li>
+        <li>Hidden layer: \(\displaystyle \delta_j = \bigl(\sum_{k} w_{jk}\,\delta_k\bigr)\;f'(a_j).\)</li>
+        <li>Weight grads: \(\partial L/\partial w_{ij} = \delta_j\;z_i.\)</li>
+        <li>If optimizing input \(z_1\): \(\partial L/\partial z_1 = \sum_{j\in H} \delta_j\,w_{1j}.\)</li>
+      </ul>
+    </li>
+    <li><strong>Universal Approximation:</strong>  
+      A single hidden layer NN with enough neurons can approximate any continuous function on a compact domain.</li>
+  </ul>
+
+  <h3>I. Reinforcement Learning Basics</h3>
+  <ul>
+    <li><strong>Return:</strong>  
+      \(\displaystyle G_t = R_{t+1} + \gamma\,R_{t+2} + \gamma^2\,R_{t+3} + \cdots.\)</li>
+    <li><strong>Value function:</strong>  
+      \(\displaystyle V^{\pi}(s) = \mathbb{E}_{\pi}\bigl[G_t \mid s_t = s\bigr].\)</li>
+    <li><strong>Action-value (Q):</strong>  
+      \(\displaystyle Q^{\pi}(s,a) = \mathbb{E}\bigl[R(s,a,s') + \gamma\,V^{\pi}(s')\bigr].\)</li>
+    <li><strong>Bellman Equations:</strong>  
+      \(\displaystyle V^{\pi}(s) = \sum_{a}\pi(a\mid s)\sum_{s'}P(s'\mid s,a)\bigl[R(s,a,s') + \gamma\,V^{\pi}(s')\bigr].\)  
+      \(\displaystyle V^*(s) = \max_{a}\sum_{s'}P(s'\mid s,a)\bigl[R(s,a,s') + \gamma\,V^*(s')\bigr].\)</li>
+    <li><strong>Policy:</strong> \(\pi^*(s) = \arg\max_a Q^*(s,a).\)</li>
+    <li><strong>Discount factor:</strong> \(\gamma \in [0,1)\). Ensures finite sum of rewards and encodes time preference.</li>
+  </ul>
+
+  <hr>
+  <p style="font-size: 0.9em; color: #666;">This cheatsheet is formatted for quick reference. Keep it accessible during closed-book exam to recall essential formulas, update rules, and definitions.</p>
+
+</body>
+</html>
